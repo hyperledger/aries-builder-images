@@ -104,6 +104,7 @@ jobs:
         timeout-minutes: 120
         run: > 
           cargo xtask build-docker-image -v "${TARGET}${SUB:+.$SUB}"
+          --tag "${DOCKER_METADATA_OUTPUT_VERSION}"
           --build-arg "ANDROID_NDK=${{ env.ANDROID_NDK }}"
           --build-arg "ANDROID_SDK=${{ env.ANDROID_SDK }}"
           --build-arg "ANDROID_VERSION=${{ env.ANDROID_VERSION }}"
