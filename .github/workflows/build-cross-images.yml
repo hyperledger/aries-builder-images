@@ -174,7 +174,7 @@ jobs:
             startsWith(github.ref, 'refs/tags/v')
           )
         run: >
-          cargo xtask build-docker-image -v --repository ghcr.io/${{ github.repository_owner }} --push "${TARGET}${SUB:+.$SUB}"
+          cargo xtask build-docker-image -v --repository ghcr.io/${{ github.repository_owner }}/${{ github.event.repository.name }} --push "${TARGET}${SUB:+.$SUB}"
           --tag "${DOCKER_METADATA_OUTPUT_VERSION}"
           --build-arg "ANDROID_NDK=${{ env.ANDROID_NDK }}"
           --build-arg "ANDROID_SDK=${{ env.ANDROID_SDK }}"
