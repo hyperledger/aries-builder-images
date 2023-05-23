@@ -68,7 +68,17 @@ jobs:
           repository: cross-rs/cross
           ref: ${{ env.CROSS_REPO_REF }}
           path: cross
-
+          
+      - name: git patch (cross)
+        run: git apply ../patches/cross.patch
+        working-directory: ./cross
+        
+      - name: Configure Android/NDK/SDK
+        working-directory: ./cross
+        run: |
+          grep 'ARG ANDROID_' ./docker/Dockerfile.*
+          grep 'libunwind.a' ./docker/android-system.sh || true
+          
       - uses: ./.github/actions/setup-rust
 
       - name: Set up Docker Buildx
